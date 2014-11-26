@@ -1,14 +1,14 @@
-DbMolePanel
+MailPanel
 ===========
 
-A panel for Tracy Debugger with DbMole statistics
+A panel for Tracy Debugger that show output of both html and plaintext versions of emails sent by Atk14 ApplicationMailer.
 
 Basic usage
 -----------
 
 ```php
 $bar = Tracy\Debugger::getBar();
-$bar->addPanel(new DbMolePanel($dbmole));
+$bar->addPanel(new MailPanel($dbmole));
 ```
 
 Usage in an ATK14 application (built upon Atk14Skelet)
@@ -27,21 +27,14 @@ if(
 }
 ```
 
-Enable collecting DbMole statistics in DEVELOPMENT.
-
-```php
-// file: config/settings.php
-define("DBMOLE_COLLECT_STATICTICS",DEVELOPMENT);
-```
-
-Add DbMole panel to Tracy in \_application_after_filter().
+Add MailPanel panel to Tracy in \_application_after_filter().
 
 ```php
 // file: app/controllers/application_base.php
 function _application_after_filter(){
-  if(DBMOLE_COLLECT_STATICTICS){
+  if(!TEST){
     $bar = Tracy\Debugger::getBar();
-    $bar->addPanel(new DbMolePanel($this->dbmole));
+    $bar->addPanel(new MailPanel($this->dbmole));
   }
 }
 ```
@@ -53,5 +46,5 @@ Just use the Composer:
 
 ```
 $ cd path/to/your/atk14/project/
-$ php composer.phar require atk14/dbmole-panel dev-master
+$ php composer.phar require atk14/mail-panel dev-master
 ```
