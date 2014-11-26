@@ -1,0 +1,23 @@
+{
+        "name": "atk14/mail-panel",
+        "type": "library",
+        "description": "A panel for Tracy Debugger showing html and plain output of ApplicationMailer",
+        "keywords": ["atk14", "mail", "tracy"],
+        "homepage": "https://github.com/atk14/MailPanel",
+        "license": ["MIT"],
+        "authors": [
+                {
+                        "name": "Michal Vojan",
+                        "homepage": "https://github.com/mysutka"
+                }
+        ],
+        "require": {
+                "php": ">=5.0.0",
+                 "tracy/tracy": ">=2.2"
+        },
+        "require-dev": {
+        },
+        "autoload": {
+                "classmap": ["src"]
+        }
+}
