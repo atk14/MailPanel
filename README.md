@@ -34,7 +34,7 @@ Add MailPanel panel to Tracy in \_application_after_filter().
 function _application_after_filter(){
   if(!TEST){
     $bar = Tracy\Debugger::getBar();
-    $bar->addPanel(new MailPanel($this->dbmole));
+    $bar->addPanel(new MailPanel($this->mailer));
   }
 }
 ```
