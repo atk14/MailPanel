@@ -8,7 +8,7 @@ Basic usage
 
 ```php
 $bar = Tracy\Debugger::getBar();
-$bar->addPanel(new MailPanel($dbmole));
+$bar->addPanel(new MailPanel($this->mailer));
 ```
 
 Usage in an ATK14 application (built upon Atk14Skelet)
