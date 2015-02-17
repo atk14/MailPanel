@@ -20,6 +20,8 @@
  *			$bar->addPanel(new DbMolePanel($this->dbmole));
  *		}
  *	}
+ *
+ *	TODO: could be nice to create some styles
  */
 class MailPanel implements Tracy\IBarPanel{
 	function __construct($mailer){
@@ -37,19 +39,35 @@ class MailPanel implements Tracy\IBarPanel{
 	function getPanel(){
 		$out = array();
 		$out[] = '<div style="height: 500px; width: 800px; overflow:scroll;">';
-		if ($this->mailer->body_html) {
-			$out[] = '<code id="tracy_panel_mailer_body_html">';
-			$out[] = "<strong>HTML body</strong><hr>";
-			$out[] = $this->mailer->body_html;
-			$out[] = "</code>";
-		}
-		if ($this->mailer->body) {
-			$out[] = '<code id="tracy_panel_mailer_body_plain"><pre>';
-			$out[] = "<strong>Plain text body</strong><hr>";
-			$out[] = $this->mailer->body;
+		$out[] = '<div class="tracy-inner tracy-MailPanel">';
+		if ($this->mailer) {
+			$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Headers"));
+			$out[] = '<code id="tracy_panel_mailer_body_headers"><pre class="tracy-dump">';
+			$out[] = sprintf("From: %s", $this->mailer->from, $this->mailer->from_name);
+			$out[] = sprintf("To: %s", $this->mailer->to, $this->mailer->to_name);
+			$out[] = sprintf("Cc: %s", $this->mailer->cc);
+			$out[] = sprintf("Bcc: %s", $this->mailer->bcc);
+			$out[] = sprintf("Content-Type: %s", $this->mailer->content_type);
+			$out[] = sprintf("Content-Charset: %s", $this->mailer->content_charset);
 			$out[] = "</pre></code>";
+
+			if ($this->mailer->body_html) {
+				$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("HTML body"));
+				$out[] = '<div class="tracy-dump">';
+				$out[] = $this->mailer->body_html;
+				$out[] = "</div>";
+			}
+			if ($this->mailer->body) {
+				$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Plain text body"));
+				$out[] = '<code id="tracy_panel_mailer_body_plain">';
+				$out[] = '<pre class="tracy-dump">';
+				$out[] = $this->mailer->body;
+				$out[] = "</pre>";
+				$out[] = "</code>";
+			}
 		}
-		$out[] = '</div>';
+		$out[] = "</div>"; # panel panel-default
+		$out[] = "</div>";
 		return join("\n",$out);
 	}
 }
