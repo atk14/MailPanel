@@ -29,7 +29,7 @@ class MailPanel implements Tracy\IBarPanel{
 	}
 
 	function getTab(){
-		if ($this->mailer->body || $this->mailer->body_html) {
+		if ($this->mailer && ($this->mailer->body || $this->mailer->body_html)) {
 			return "<strong>Mailer</strong>";
 		} else {
 			return "Mailer";
@@ -40,7 +40,7 @@ class MailPanel implements Tracy\IBarPanel{
 		$out = array();
 		$out[] = '<div style="height: 500px; width: 800px; overflow:scroll;">';
 		$out[] = '<div class="tracy-inner tracy-MailPanel">';
-		if ($this->mailer) {
+		if ($this->mailer && ($this->mailer->body_html || $this->mailer->body)) {
 			$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Headers"));
 			$out[] = '<code id="tracy_panel_mailer_body_headers"><pre class="tracy-dump">';
 			$out[] = sprintf("From: %s", $this->mailer->from, $this->mailer->from_name);
@@ -65,6 +65,12 @@ class MailPanel implements Tracy\IBarPanel{
 				$out[] = "</pre>";
 				$out[] = "</code>";
 			}
+		} else {
+			$out[] = '<code id="tracy_panel_mailer_body_plain">';
+			$out[] = '<pre class="tracy-dump">';
+			$out[] = _("No mail has been sent");
+			$out[] = "</pre>";
+			$out[] = "</code>";
 		}
 		$out[] = "</div>"; # panel panel-default
 		$out[] = "</div>";
