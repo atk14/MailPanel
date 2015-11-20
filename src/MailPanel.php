@@ -61,7 +61,7 @@ class MailPanel implements Tracy\IBarPanel{
 				$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Plain text body"));
 				$out[] = '<code id="tracy_panel_mailer_body_plain">';
 				$out[] = '<pre class="tracy-dump">';
-				$out[] = $this->mailer->body;
+				$out[] = htmlspecialchars($this->mailer->body);
 				$out[] = "</pre>";
 				$out[] = "</code>";
 			}
