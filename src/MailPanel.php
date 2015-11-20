@@ -39,7 +39,7 @@ class MailPanel implements Tracy\IBarPanel{
 	function getPanel(){
 		$out = array();
 		$out[] = '<div style="height: 500px; width: 800px; overflow:scroll;">';
-		$out[] = '<div class="tracy-inner tracy-MailPanel">';
+		$out[] = '<div class="tracy-MailPanel">';
 		if ($this->mailer && ($this->mailer->body_html || $this->mailer->body)) {
 			$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Headers"));
 			$out[] = '<code id="tracy_panel_mailer_body_headers"><pre class="tracy-dump">';
@@ -54,7 +54,7 @@ class MailPanel implements Tracy\IBarPanel{
 			if ($this->mailer->body_html) {
 				$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("HTML body"));
 				$out[] = '<div class="tracy-dump">';
-				$out[] = $this->mailer->body_html;
+				$out[] = sprintf('<iframe width="650" height="450" src="data:text/html;charset=utf-8;base64,%s"></iframe>',base64_encode($this->mailer->body_html));
 				$out[] = "</div>";
 			}
 			if ($this->mailer->body) {
