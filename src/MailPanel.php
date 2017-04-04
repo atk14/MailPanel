@@ -43,8 +43,8 @@ class MailPanel implements Tracy\IBarPanel{
 		if ($this->mailer && ($this->mailer->body_html || $this->mailer->body)) {
 			$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Headers"));
 			$out[] = '<code id="tracy_panel_mailer_body_headers"><pre class="tracy-dump">';
-			$out[] = sprintf("From: %s", $this->mailer->from, $this->mailer->from_name);
-			$out[] = sprintf("To: %s", $this->mailer->to, $this->mailer->to_name);
+			$out[] = sprintf("From: %s", $this->mailer->from);
+			$out[] = sprintf("To: %s", $this->mailer->to);
 			$out[] = sprintf("Cc: %s", $this->mailer->cc);
 			$out[] = sprintf("Bcc: %s", $this->mailer->bcc);
 			$out[] = sprintf("Content-Type: %s", $this->mailer->content_type);
