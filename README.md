@@ -46,5 +46,5 @@ Just use the Composer:
 
 ```
 $ cd path/to/your/atk14/project/
-$ php composer.phar require atk14/mail-panel dev-master
+$ composer require atk14/mail-panel
 ```
