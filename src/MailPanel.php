@@ -24,6 +24,9 @@
  *	TODO: could be nice to create some styles
  */
 class MailPanel implements Tracy\IBarPanel{
+
+	var $mailer;
+
 	function __construct($mailer){
 		$this->mailer = $mailer;
 	}
