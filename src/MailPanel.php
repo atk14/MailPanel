@@ -41,11 +41,12 @@ class MailPanel implements Tracy\IBarPanel{
 
 	function getPanel(){
 		$out = array();
-		$out[] = '<div style="height: 500px; width: 800px; overflow:scroll;">';
+		$out[] = '<div style="overflow: auto;">';
 		$out[] = '<div class="tracy-MailPanel">';
 		if ($this->mailer && ($this->mailer->body_html || $this->mailer->body)) {
 			$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Headers"));
 			$out[] = '<code id="tracy_panel_mailer_body_headers"><pre class="tracy-dump">';
+			$out[] = sprintf("Subject: %s", $this->mailer->subject);
 			$out[] = sprintf("From: %s", $this->mailer->from);
 			$out[] = sprintf("To: %s", $this->mailer->to);
 			$out[] = sprintf("Cc: %s", $this->mailer->cc);
@@ -53,13 +54,6 @@ class MailPanel implements Tracy\IBarPanel{
 			$out[] = sprintf("Content-Type: %s", $this->mailer->content_type);
 			$out[] = sprintf("Content-Charset: %s", $this->mailer->content_charset);
 			$out[] = "</pre></code>";
-
-			if ($this->mailer->body_html) {
-				$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("HTML body"));
-				$out[] = '<div class="tracy-dump">';
-				$out[] = sprintf('<iframe width="650" height="450" src="data:text/html;charset=utf-8;base64,%s"></iframe>',base64_encode($this->mailer->body_html));
-				$out[] = "</div>";
-			}
 			if ($this->mailer->body) {
 				$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Plain text body"));
 				$out[] = '<code id="tracy_panel_mailer_body_plain">';
@@ -67,6 +61,12 @@ class MailPanel implements Tracy\IBarPanel{
 				$out[] = htmlspecialchars($this->mailer->body);
 				$out[] = "</pre>";
 				$out[] = "</code>";
+			}
+			if ($this->mailer->body_html) {
+				$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("HTML body"));
+				$out[] = '<div class="tracy-dump">';
+				$out[] = '<iframe style="width: 100%; height: 450px;" src="data:text/html;charset=utf-8;base64,'.base64_encode($this->mailer->body_html).'"></iframe>';
+				$out[] = "</div>";
 			}
 		} else {
 			$out[] = '<code id="tracy_panel_mailer_body_plain">';
