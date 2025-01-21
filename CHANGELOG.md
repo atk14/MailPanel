@@ -3,6 +3,11 @@ Change Log
 
 All notable changes to the MailPanel will be documented in this file.
 
+[1.0.2] - 2025-01-21
+--------------------
+
+* Printed subject + markup tuned
+
 [1.0.1] - 2024-10-03
 --------------------
 
