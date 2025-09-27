@@ -3,6 +3,12 @@ Change Log
 
 All notable changes to the MailPanel will be documented in this file.
 
+[1.0.3] - 2025-09-27
+--------------------
+
+* 10d3d8c - MailPanel shows all sent emails
+
+
 [1.0.2] - 2025-01-21
 --------------------
 
