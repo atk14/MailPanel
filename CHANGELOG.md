@@ -3,6 +3,11 @@ Change Log
 
 All notable changes to the MailPanel will be documented in this file.
 
+[1.0.4] - 2026-05-27
+--------------------
+
+* b1fda44 - Dumping attachments
+
 [1.0.3] - 2025-09-27
 --------------------
 
