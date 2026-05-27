@@ -100,6 +100,18 @@ class MailPanel implements Tracy\IBarPanel{
 			$out[] = '<iframe style="width: 100%; height: 450px;" src="data:text/html;charset=utf-8;base64,'.base64_encode($email->body_html).'"></iframe>';
 			$out[] = "</div>";
 		}
+		if ($email->attachments) {
+			$out[] = sprintf('<div class="panel-heading"><strong>%s</strong></div>', _("Attachments"));
+			$out[] = "<ul>";
+			foreach($email->attachments as $attachment){
+				$out[] = "<li>";
+				$out[] = "[$attachment[mime_type]] ";
+				$out[] = "<strong>".htmlspecialchars($attachment["filename"])."</strong>";
+				$out[] = ($attachment["body"] instanceof StringBuffer ? $attachment["body"]->getLength() : strlen($attachment["body"]))." bytes";
+				$out[] = "</li>";
+			}
+			$out[] = "</ul>";
+		}
 		return join("\n",$out);
 	}
 }
